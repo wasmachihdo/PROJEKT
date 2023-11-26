@@ -1,5 +1,7 @@
 <!DOCTYPE html> 
 <html lang="en">
+
+<!--Name Überschrift: noch ändern-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +9,39 @@
 </head>
 <body>
 
-<h1>Todo App</h1>
+<h1>THINGS TO BE DONE</h1>
 
-<form action=""></form>
-    <div>
-        <label for="title">Todo Title</label>
-        <input type="text" name="title" placeholder="Enter Todo...">
-        <br>
-        <button type="submit">Add</button>
-    </div>
+<!--Eingabe Task & Eingabe Ablaufdatum-->
+
+    <form action="">
+        <div>
+            <label for="title">Todo Title</label>
+            <input type="text" name="title" placeholder="Enter Todo...">
+            <br>
+            <label for="title">Should be finished until</label>
+            <input type="date" name="due" placeholder="Enter date..."> 
+            <br>
+            <button type="submit">Add</button>
+        </div>
+    </form>
+
+   
+
+   <!--Jinja for loop -->
+    {% for todo in todo_list %}
+        <p> {{todo.id}} | {{ todo.title }}  </p>   
+
+        {% if todo.complete == False %}    <!--Completed / Not Completed Button -->
+            <span>Not Completed</span>   
+        {% else %}
+            <span> Completed</span>
+        {% endif %}
+
+        <a href="/">Done</a>  <!--Task fertig Button und Verweis auf Main Page -->
+        <a href="/">Delete</a>  <!--Löschen Button und Verweis auf Main Page -->
+
+
+    {% endfor %}
 
 </body>
-
-
 </html>
