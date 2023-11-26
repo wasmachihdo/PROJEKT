@@ -13,14 +13,14 @@
 
 <!--Eingabe Task & Eingabe Ablaufdatum-->
 
-    <form action="">
+    <form action="/add" method="post">
         <div>
             <label for="title">Todo Title</label>
             <input type="text" name="title" placeholder="Enter Todo...">
             <br>
-            <label for="title">Should be finished until</label>
+           <!-- <label for="title">Should be finished until</label>
             <input type="date" name="due" placeholder="Enter date..."> 
-            <br>
+            <br> -->
             <button type="submit">Add</button>
         </div>
     </form>
@@ -36,9 +36,8 @@
         {% else %}
             <span> Completed</span>
         {% endif %}
-
-        <a href="/">Done</a>  <!--Task fertig Button und Verweis auf Main Page -->
-        <a href="/">Delete</a>  <!--Löschen Button und Verweis auf Main Page -->
+        <a href="/update/{{ todo.id }}">Done</a>  <!--Task fertig Button und Verweis auf Main Page -->
+        <a href="/delete/{{ todo.id }}">Delete</a>  <!--Löschen Button und Verweis auf Main Page -->
 
 
     {% endfor %}
