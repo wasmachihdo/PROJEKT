@@ -18,29 +18,32 @@
             <label for="title">Todo Title</label>
             <input type="text" name="title" placeholder="Enter Todo...">
             <br>
-           <!-- <label for="title">Should be finished until</label>
+            <label for="due">Should be finished until</label>
             <input type="date" name="due" placeholder="Enter date..."> 
-            <br> -->
+            <br>
             <button type="submit">Add</button>
         </div>
     </form>
+    
 
-   
 
    <!--Jinja for loop -->
-    {% for todo in todo_list %}
-        <p> {{todo.id}} | {{ todo.title }}  </p>   
 
-        {% if todo.complete == False %}    <!--Completed / Not Completed Button -->
-            <span>Not Completed</span>   
-        {% else %}
-            <span> Completed</span>
-        {% endif %}
-        <a href="/update/{{ todo.id }}">Done</a>  <!--Task fertig Button und Verweis auf Main Page -->
-        <a href="/delete/{{ todo.id }}">Delete</a>  <!--Löschen Button und Verweis auf Main Page -->
+{% for todo in todo_list %}
+    <p style="{{ 'color: red;' if todo.due and todo.due < current_date else '' }}">
+        {{ todo.id }} | {{ todo.title }} 
+        {% if todo.due %} - Due: {{ todo.due.strftime('%Y-%m-%d') }} {% endif %}
+    </p>   
 
+    {% if todo.complete == False %}    <!--Completed / Not Completed Button -->
+        <span>Not Completed</span>   
+    {% else %}
+        <span> Completed</span>
+    {% endif %}
+    <a href="/update/{{ todo.id }}">Done</a>  <!--Task fertig Button und Verweis auf Main Page -->
+    <a href="/delete/{{ todo.id }}">Delete</a>  <!--Löschen Button und Verweis auf Main Page -->
+{% endfor %}
 
-    {% endfor %}
 
 </body>
 </html>

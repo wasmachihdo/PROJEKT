@@ -22,19 +22,21 @@ class Todo(db.Model): #Tabellendaten: ID, Titel, Ablaufdatum
     complete: Mapped[bool] = mapped_column(db.Boolean, default=False)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
-#QUERY MODELS -> 24.11
-
+#QUERY MODELS
 @app.route('/')
-def index(): #alle Tasks  
-    todo_list = Todo.query.all() #Liste generieren  
-    return render_template("base.html", todo_list=todo_list) # HTML in Template-Dateien ausgelagert und mit render_template versendet
+def index(): #alle Tasks 
+    todo_list = Todo.query.all() #Liste generieren
+    current_date = datetime.datetime.now() #aktuelles Datum soll mit Eingabe verglichen werden
+    return render_template("base.html", todo_list=todo_list, current_date=current_date) # HTML in Template-Dateien ausgelagert und mit render_template versendet
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
-#Task hinzufügen
+#Task und Datum hinzufügen
 @app.route("/add", methods=["POST"])
 def add():
     title = request.form.get("title")
-    new_todo = Todo(title=title)
+    due_str = request.form.get("due")  #Datum als String erhalten
+    due_date = datetime.datetime.strptime(due_str, "%Y-%m-%d") if due_str else None #Datum wird konvertieren aus dem String, falls vorhanden
+    new_todo = Todo(title=title, due=due_date)
     db.session.add(new_todo)
     db.session.commit()
     return redirect(url_for("index"))
@@ -57,12 +59,6 @@ def delete(todo_id):
     db.session.delete(todo)
     db.session.commit()
     return redirect(url_for("index"))
-
-
-
-
-#--------------------------------------------------------------------------------------------------------------------------------------------------
-#datetime
 
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
