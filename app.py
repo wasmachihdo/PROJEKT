@@ -6,13 +6,15 @@ from sqlalchemy.orm import Mapped, mapped_column
 import datetime #Modul für Datum (Ablaufdatum des Tasks)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
+#INITIALISIERUNG FLASK
 
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite" #Generierung der Datei zur Datenspeicherung
+app = Flask(__name__) 
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite" #Setzt die Datenbank-URI für SQLAlchemy (Datenspeicherung)
 db = SQLAlchemy() #Datenbank kreieren
 db.init_app(app)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
+#TABELLE ERSTELLEN
 
 class Todo(db.Model): #Tabellendaten: ID, Titel, Ablaufdatum
     __tablename__="todo"
@@ -23,6 +25,7 @@ class Todo(db.Model): #Tabellendaten: ID, Titel, Ablaufdatum
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #QUERY MODELS
+
 @app.route('/')
 def index(): #alle Tasks 
     todo_list = Todo.query.all() #Liste generieren
@@ -30,19 +33,22 @@ def index(): #alle Tasks
     return render_template("base.html", todo_list=todo_list, current_date=current_date) # HTML in Template-Dateien ausgelagert und mit render_template versendet
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
-#Task und Datum hinzufügen
-@app.route("/add", methods=["POST"])
+#TASK UND DATUM HINZUFÜGEN
+
+@app.route("/add", methods=["POST"]) #Route definieren, die auf POST-Anfragen an "/add" reagiert
 def add():
-    title = request.form.get("title")
-    due_str = request.form.get("due")  #Datum als String erhalten
-    due_date = datetime.datetime.strptime(due_str, "%Y-%m-%d") if due_str else None #Datum wird konvertieren aus dem String, falls vorhanden
-    new_todo = Todo(title=title, due=due_date)
-    db.session.add(new_todo)
-    db.session.commit()
-    return redirect(url_for("index"))
+    title = request.form.get("title") #title aus dem Formular abrufen
+    due_str = request.form.get("due") #Fälligkeitsdatum als String aus dem Formular abrufen
+    due_date = datetime.datetime.strptime(due_str, "%Y-%m-%d") if due_str else None #Fälligkeitsdatum aus dem String konvertieren, falls vorhanden, ansonsten None setzen
+
+    new_todo = Todo(title=title, due=due_date) #neues Todo-Objekt
+    db.session.add(new_todo) #neues Todo-Objekt hinzufügen
+    db.session.commit() 
+    return redirect(url_for("index")) #Weiterleitung zur 'index'-Route
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
-#Task updaten
+
+#TASK UPDATEN
 @app.route("/update/<int:todo_id>")
 def update(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -51,7 +57,8 @@ def update(todo_id):
     return redirect(url_for("index"))
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
-#Task löschen
+
+#TASK LÖSCHEN
 @app.route("/delete/<int:todo_id>")
 def delete(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -60,13 +67,12 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for("index"))
 
-
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     with app.app_context():
-        db.create_all()
-        app.run(debug=True, port=5000)
+        db.create_all() #Erstellt alle Datenbanktabellen, welche gemacht wurden
+        app.run(debug=True, port=5000) #Flask-Entwicklungsserver
  
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 

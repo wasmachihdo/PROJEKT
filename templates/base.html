@@ -1,8 +1,9 @@
 <!DOCTYPE html> 
 <html lang="en">
 
-<!--Name Überschrift: noch ändern-->
+<!--Name Überschrift ändern?-->
 <head>
+    <link rel="stylesheet" href="/static/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>todo app</title>
@@ -15,10 +16,10 @@
 
     <form action="/add" method="post">
         <div>
-            <label for="title">Todo Title</label>
+            <label for="title">This needs to be done:</label>
             <input type="text" name="title" placeholder="Enter Todo...">
             <br>
-            <label for="due">Should be finished until</label>
+            <label for="due">Should be finished until:</label>
             <input type="date" name="due" placeholder="Enter date..."> 
             <br>
             <button type="submit">Add</button>
@@ -27,22 +28,33 @@
     
 
 
-   <!--Jinja for loop -->
+<!--Jinja for loop -->
 
 {% for todo in todo_list %}
-    <p style="{{ 'color: red;' if todo.due and todo.due < current_date else '' }}">
-        {{ todo.id }} | {{ todo.title }} 
-        {% if todo.due %} - Due: {{ todo.due.strftime('%Y-%m-%d') }} {% endif %}
-    </p>   
+    {% if todo.due and todo.due < current_date %}
+        {% set style_string = 'color: red;' %}
+    {% else %}
+        {% set style_string = '' %}
+    {% endif %}
 
-    {% if todo.complete == False %}    <!--Completed / Not Completed Button -->
+    <p style="{{ style_string }}">
+        {{ todo.id }} | {{ todo.title }}
+        {% if todo.due %} - Due: {{ todo.due.strftime('%Y-%m-%d') }} {% endif %}
+    </p>
+
+    {% if todo.complete == False %} <!--Completed / Not Completed Button -->
         <span>Not Completed</span>   
     {% else %}
         <span> Completed</span>
     {% endif %}
-    <a href="/update/{{ todo.id }}">Done</a>  <!--Task fertig Button und Verweis auf Main Page -->
+    <a href="/update/{{ todo.id }}">Modify Status</a>  <!--Task fertig Button und Verweis auf Main Page -->
     <a href="/delete/{{ todo.id }}">Delete</a>  <!--Löschen Button und Verweis auf Main Page -->
 {% endfor %}
+
+
+<footer>
+    <p>© 2023 One Great Todo App. All rights reserved.</p>
+</footer>
 
 
 </body>
