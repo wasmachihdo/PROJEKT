@@ -20,25 +20,18 @@
             <input type="text" name="title" placeholder="Enter Todo... "maxlength="40">
             <br>
             <label for="due">Should be finished until:</label>
-            <input type="date" name="due" placeholder="Enter date..."> 
+            <input type="date" name="due" placeholder="Enter date... " max="2030-12-31"> <!-- Code: pattern="^\d{4}$" title="Enter a 4-digit year" required" geht nicht-->
             <br>
             <button type="submit">Add</button>
         </div>
     </form>
     
 
-
 <!--Jinja for loop -->
 
 {% for todo in todo_list %}
-    {% if todo.due and todo.due < current_date %}
-        {% set style_string = 'color: red;' %}
-    {% else %}
-        {% set style_string = '' %}
-    {% endif %}
-
     <div class="todo-item">
-        <p style="{{ style_string }}">
+        <p class="{{ "red-text" if todo.due and todo.due < current_date else "" }}">
             {{ todo.id }} | {{ todo.title }}
             {% if todo.due %} - Due: {{ todo.due.strftime('%Y-%m-%d') }} {% endif %}
         </p>
@@ -48,8 +41,8 @@
             {% else %}
                 <span>Completed</span>
             {% endif %}
-            <a href="/update/{{ todo.id }}">Modify Status</a> <!--Task fertig Button und Verweis auf Main Page -->
-            <a href="/delete/{{ todo.id }}">Delete</a> <!--Löschen Button und Verweis auf Main Page -->
+            <a href="/update/{{ todo.id }}" class="update">Modify Status</a> <!--Task fertig Button und Verweis auf Main Page -->
+            <a href="/delete/{{ todo.id }}" class="delete">Delete</a> <!--Löschen Button und Verweis auf Main Page -->
         </div>
     </div>
 

@@ -19,7 +19,7 @@ db.init_app(app)
 class Todo(db.Model): #Tabellendaten: ID, Titel, Ablaufdatum
     __tablename__="todo"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True) #id wird automatisch vergeben
-    title: Mapped[str] = mapped_column(String(40), nullable=False) #maximal 40 Zeichen für die Eingabe des Tasks (geht nicht)
+    title: Mapped[str] = mapped_column(String(40), nullable=False) #maximal 40 Zeichen für die Eingabe des Tasks 
     due: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=False),nullable=True) #Eingabe Datum 
     complete: Mapped[bool] = mapped_column(db.Boolean, default=False)
 

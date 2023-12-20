@@ -9,7 +9,7 @@ body {
 }
 
 h1 {
-    background-color: #273b51; 
+    background-color: #08062c; 
     color: white;
     margin: 0;
     padding: 30px 0; 
@@ -24,8 +24,12 @@ input[type=text], input[type=date] {
     margin: 10px 0;
     border: 2px solid #bbb; 
     border-radius: 5px; 
-    width: 40%; 
-    font-size: 1.1em; 
+    max-width: 600px; /* Maximale Breite festlegen */
+    min-width: 300px; /* Minimale Breite festlegen */
+}
+
+label {
+    font-size: 1.4em; 
 }
 
 button {
@@ -35,7 +39,6 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.1em; 
     transition: background-color 0.3s; 
 }
 
@@ -43,17 +46,18 @@ button:hover {
     background-color: #368f47; 
 }
 
-/* Style for Todo items */
+/* Stil für Todo items */
 .todo-item {
     background-color: white;
     margin: 20px auto; 
     padding: 20px;
     border-radius: 5px;
-    width: 40%; 
+    max-width: 600px; /* Maximale Breite festlegen */
+    min-width: 300px; /* Minimale Breite festlegen */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    font-size: 1.1em; 
     text-align: left;
 }
+
 
 .todo-status {
     display: flex;
@@ -62,9 +66,16 @@ button:hover {
     margin-top: 10px;
 }
 
+
+.red-text {
+    color: red;
+}
+
+
 .todo-item p {
     margin: 0; /* margin weg */
 }
+
 
 .todo-item a {
     background-color: #273b51;
@@ -76,15 +87,21 @@ button:hover {
     transition: background-color 0.3s; 
 }
 
-.todo-item a:hover {
-    background-color: #ff3535;
+
+.todo-item .update:hover {
+    background-color: #2b99ff;
 }
 
+
+.todo-item .delete:hover {
+    background-color: #ff2b2b;
+}
+
+
 footer {
-    position:fixed;
     width: 100%;
     height: 20px;
-    background-color: #273b51; /* gleich wie header */
+    background-color: #08062c; /* gleich wie header */
     color: white;
     text-align: center;
     padding: 20px 0;
