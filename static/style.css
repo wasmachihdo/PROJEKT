@@ -1,3 +1,12 @@
+:root {
+    --max-width: 600px;
+    --min-width: 300px;
+    --button-bg: #505050;
+    --button-bg-hover: #368f47;
+    --button-padding: 10px 20px;
+    --button-border-radius: 5px;
+}
+
 body {
     font-family: Verdana, sans-serif; 
     margin: 0;
@@ -8,56 +17,71 @@ body {
     font-size: 14px; 
 }
 
-h1 {
+h1, footer {
     background-color: #08062c; 
     color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
     margin: 0;
-    padding: 30px 0; 
 }
 
-form {
-    margin: 30px 0; 
+footer {
+    width: 100%;
+    height: 20px;
 }
 
-input[type=text], input[type=date] {
-    padding: 15px; 
+form, .todo-item {
+    margin: 20px auto; 
+    max-width: var(--max-width);
+    min-width: var(--min-width);
+}
+
+input[type=text], input[type=date], select {
+    width: 500px;
+    padding: 15px;
     margin: 10px 0;
-    border: 2px solid #bbb; 
-    border-radius: 5px; 
-    max-width: 600px; /* Maximale Breite festlegen */
-    min-width: 300px; /* Minimale Breite festlegen */
-}
-
-label {
-    font-size: 1.4em; 
-}
-
-button {
-    background-color: #505050; 
-    color: white;
-    padding: 10px 20px; 
-    border: none;
+    border: 2px solid #bbb;
     border-radius: 5px;
+    font-size: 1.1em;
     cursor: pointer;
-    transition: background-color 0.3s; 
 }
 
-button:hover {
-    background-color: #368f47; 
+select#category:focus, .todo-item a:focus {
+    border-color: #505050;
 }
 
-/* Stil für Todo items */
+.category-links a, button {
+    background-color: var(--button-bg);
+    color: white;
+    padding: var(--button-padding);
+    border: none;
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category-links a {
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.category-links a:hover, button:hover {
+    background-color: var(--button-bg-hover);
+}
+
 .todo-item {
     background-color: white;
-    margin: 20px auto; 
     padding: 20px;
     border-radius: 5px;
-    max-width: 600px; /* Maximale Breite festlegen */
-    min-width: 300px; /* Minimale Breite festlegen */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     text-align: left;
 }
-
 
 .todo-status {
     display: flex;
@@ -66,44 +90,18 @@ button:hover {
     margin-top: 10px;
 }
 
-
 .red-text {
     color: red;
 }
 
-
 .todo-item p {
-    margin: 0; /* margin weg */
+    margin: 0;
 }
-
-
-.todo-item a {
-    background-color: #273b51;
-    color: white;
-    padding: 10px 15px; 
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 5px;
-    transition: background-color 0.3s; 
-}
-
 
 .todo-item .update:hover {
     background-color: #2b99ff;
 }
 
-
 .todo-item .delete:hover {
     background-color: #ff2b2b;
 }
-
-
-footer {
-    width: 100%;
-    height: 20px;
-    background-color: #08062c; /* gleich wie header */
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-}
-

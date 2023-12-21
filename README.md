@@ -53,7 +53,7 @@ Diese Todo-Anwendung ist ein einfaches, aber leistungsfähiges Werkzeug zur Verw
 
 ## **Verwendete Technologien**
 
-- **primären Programmiersprache:** Python
+- **primäre Programmiersprache:** Python
 - **Backend:** Flask
 - **Datenbank:** SQLAlchemy (SQLite)
 - **Frontend:** HTML, CSS

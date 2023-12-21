@@ -22,6 +22,7 @@ class Todo(db.Model): #Tabellendaten: ID, Titel, Ablaufdatum
     title: Mapped[str] = mapped_column(String(40), nullable=False) #maximal 40 Zeichen für die Eingabe des Tasks 
     due: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=False),nullable=True) #Eingabe Datum 
     complete: Mapped[bool] = mapped_column(db.Boolean, default=False)
+    category: Mapped[str] = mapped_column(String(50)) # Kategorien oder Tags
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #QUERY MODELS
@@ -40,8 +41,8 @@ def add():
     title = request.form.get("title") #title aus dem Formular abrufen
     due_str = request.form.get("due") #Fälligkeitsdatum als String aus dem Formular abrufen
     due_date = datetime.datetime.strptime(due_str, "%Y-%m-%d") if due_str else None #Fälligkeitsdatum aus dem String konvertieren, falls vorhanden, ansonsten None setzen
-
-    new_todo = Todo(title=title, due=due_date) #neues Todo-Objekt
+    category = request.form.get("category")
+    new_todo = Todo(title=title, due=due_date, category=category) #neues Todo-Objekt
     db.session.add(new_todo) #neues Todo-Objekt hinzufügen
     db.session.commit() 
     return redirect(url_for("index")) #Weiterleitung zur 'index'-Route
@@ -66,6 +67,15 @@ def delete(todo_id):
     db.session.delete(todo)
     db.session.commit()
     return redirect(url_for("index"))
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------
+#KATEGORIE FILTER
+
+@app.route('/category/<category_name>')
+def tasks_by_category(category_name):
+    todo_list = Todo.query.filter_by(category=category_name).all()
+    current_date = datetime.datetime.now()
+    return render_template("base.html", todo_list=todo_list, current_date=current_date)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 
