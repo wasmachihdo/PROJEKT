@@ -71,13 +71,22 @@ def delete(todo_id):
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #KATEGORIE FILTER
 
+#@app.route('/category/<category_name>')
+#def tasks_by_category(category_name):
+#    todo_list = Todo.query.filter_by(category=category_name).all()
+#    current_date = datetime.datetime.now()
+#    return render_template("base.html", todo_list=todo_list, current_date=current_date)
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------
+#FILTER KATEGORIE PERMANTENT ANZEIGEN
 @app.route('/category/<category_name>')
 def tasks_by_category(category_name):
     todo_list = Todo.query.filter_by(category=category_name).all()
     current_date = datetime.datetime.now()
-    return render_template("base.html", todo_list=todo_list, current_date=current_date)
+    return render_template("base.html", todo_list=todo_list, current_date=current_date, current_category=category_name)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 if __name__ == "__main__":
     with app.app_context():

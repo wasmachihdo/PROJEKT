@@ -10,6 +10,7 @@
 </head>
 <body>
 
+
 <h1>THINGS TO BE DONE</h1>
 
 
@@ -32,11 +33,12 @@
 
 <!-- Links für Kategorie- Filter -->
 <div class="category-links">
-    <a href="/">All Tasks</a> <!-- Ansicht für alle Tasks -->
-    <a href="/category/Personal">Personal</a> <!-- Ansicht für Kategorie Personal -->
-    <a href="/category/Work">Work</a> <!-- Ansicht für Kategorie Work -->
-    <a href="/category/Urgent">Urgent</a> <!-- Ansicht für Kategorie Urgent -->
+    <a href="/" class="{{ 'highlighted-category' if current_category == 'All' else '' }}">All Tasks</a>
+    <a href="/category/Personal" class="{{ 'highlighted-category' if current_category == 'Personal' else '' }}">Personal</a>
+    <a href="/category/Work" class="{{ 'highlighted-category' if current_category == 'Work' else '' }}">Work</a>
+    <a href="/category/Urgent" class="{{ 'highlighted-category' if current_category == 'Urgent' else '' }}">Urgent</a>
 </div>
+
 
 
 <!--Jinja for loop für tasks-->
@@ -59,6 +61,11 @@
     </div>
 {% endfor %}
 
+{% if todo_list|length == 0 %}
+    <div class="no-todos">
+        <p>Es sind noch keine Todos in dieser Kategorie vorhanden.</p> <!--Meldung wird angezeigt, wenn die gefilterte Liste todo_list leer ist.-->
+    </div>
+{% endif %}
 
 <footer>
     <p>© 2023 One Great Todo App. All rights reserved.</p>

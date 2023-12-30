@@ -5,10 +5,16 @@
     --button-bg-hover: #368f47;
     --button-padding: 10px 20px;
     --button-border-radius: 5px;
+    --input-width: 500px;  /* Neuer globaler CSS-Variable für die Breite der Eingabefelder */
+    --input-padding: 15px; /* Neuer globaler CSS-Variable für das Padding der Eingabefelder */
+    --input-border-color: #bbb; /* Neuer globaler CSS-Variable für die Borderfarbe der Eingabefelder */
 }
 
 body {
-    font-family: Verdana, sans-serif; 
+    font-family: Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ermöglicht, dass der Body immer mindestens so hoch wie das Viewport ist */
     margin: 0;
     padding: 0;
     background-color: #f4f4f4; 
@@ -29,7 +35,7 @@ h1 {
 }
 
 footer {
-    width: 100%;
+    margin-top: auto;
     height: 20px;
 }
 
@@ -40,17 +46,24 @@ form, .todo-item {
 }
 
 input[type=text], input[type=date], select {
-    width: 500px;
-    padding: 15px;
+    width: var(--input-width);
+    padding: var(--input-padding);
     margin: 10px 0;
-    border: 2px solid #bbb;
+    border: 2px solid var(--input-border-color);
     border-radius: 5px;
     font-size: 1.1em;
     cursor: pointer;
 }
 
+.no-todos {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+}
+
 select#category:focus, .todo-item a:focus {
-    border-color: #505050;
+    border-color: var(--input-border-color); /* Verwendung der globalen CSS-Variable für die Borderfarbe */
 }
 
 .category-links a, button {
@@ -61,11 +74,10 @@ select#category:focus, .todo-item a:focus {
     border-radius: var(--button-border-radius);
     cursor: pointer;
     transition: background-color 0.3s;
+    text-decoration: none; /* Entfernt den Unterstrich von Links */
 }
 
 .category-links a {
-    text-align: center;
-    text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
@@ -73,6 +85,10 @@ select#category:focus, .todo-item a:focus {
 
 .category-links a:hover, button:hover {
     background-color: var(--button-bg-hover);
+}
+
+.highlighted-category {
+    font-weight: bold;
 }
 
 .todo-item {
