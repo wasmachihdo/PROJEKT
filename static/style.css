@@ -1,20 +1,20 @@
-:root {
+:root {     /* Werte, die im gesamten Stylesheet verwendet werden */
     --max-width: 600px;
     --min-width: 300px;
-    --button-bg: #505050;
+    --button-bg: #505050; 
     --button-bg-hover: #368f47;
     --button-padding: 10px 20px;
     --button-border-radius: 5px;
-    --input-width: 500px;  /* Neuer globaler CSS-Variable für die Breite der Eingabefelder */
-    --input-padding: 15px; /* Neuer globaler CSS-Variable für das Padding der Eingabefelder */
-    --input-border-color: #bbb; /* Neuer globaler CSS-Variable für die Borderfarbe der Eingabefelder */
+    --input-width: 500px;  /* Breite der Eingabefelder */
+    --input-padding: 15px; /* Padding der Eingabefelder */
+    --input-border-color: #bbb; /* Borderfarbe der Eingabefelder */
 }
 
-body {
-    font-family: Verdana, sans-serif;
+body {     /* Grundlegende Stileinstellungen für <body> */
+    font-family: Roboto, sans-serif; 
     display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ermöglicht, dass der Body immer mindestens so hoch wie das Viewport ist */
+    flex-direction: column; /* Elemente von oben nach unten gestapelt */
+    min-height: 100vh; /* Body immer mindestens so hoch wie Viewport */
     margin: 0;
     padding: 0;
     background-color: #f4f4f4; 
@@ -24,7 +24,7 @@ body {
 }
 
 h1, footer {
-    background-color: #08062c; 
+    background-color: #432b46; 
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -35,12 +35,12 @@ h1 {
 }
 
 footer {
-    margin-top: auto;
+    margin-top: auto; /* Footer bleibt am unteren Rand */
     height: 20px;
 }
 
 form, .todo-item {
-    margin: 20px auto; 
+    margin: 10px auto; 
     max-width: var(--max-width);
     min-width: var(--min-width);
 }
@@ -54,6 +54,33 @@ input[type=text], input[type=date], select {
     font-size: 1.1em;
     cursor: pointer;
 }
+
+input[type=text] {
+    cursor: text;
+}
+
+.input-group {
+    display: flex; /* Aktiviert Flexbox */
+    justify-content: space-between; /* Verteilt den Platz gleichmäßig */
+}
+
+.input-group input, .input-group select {
+    width: calc(50% - 10px); /* Setzt die Breite auf 50% abzüglich des Abstands */
+}
+
+.input-group input {
+    margin-right: 10px; /* Abstand nur auf der rechten Seite des Input-Feldes  */
+}
+
+.input-group select {
+    margin-left: 10px; /* Abstand nur auf der linken Seite des Select-Feldes */
+}
+
+.input-group input, .input-group select {
+    box-sizing: border-box; /* Stellt sicher, dass Breite Ränder und Rahmen einschließt */
+    width: calc(50% - 5px);
+}
+
 
 .no-todos {
     text-align: center;

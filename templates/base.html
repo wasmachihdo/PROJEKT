@@ -8,27 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>todo app</title>
 </head>
-<body>
 
+<body>
 
 <h1>THINGS TO BE DONE</h1>
 
 
     <form action="/add" method="post">
         <div>
-            <input type="text" name="title" placeholder="Enter Todo... "maxlength="40"> <!--Taskeingabe (Text bis 40 Zeichen) -->
-            <br>
-            <input type="date" name="due" placeholder="Enter date... " max="2030-12-31"> <!--Datumseingabe (später als 2030 nicht möglich) -->
-            <br>
-            <select name="category" id="category">
-                <option value="Personal">Personal</option>
-                <option value="Work">Work</option>
-                <option value="Urgent">Urgent</option>
-            </select>
-            <br> 
-            <button type="submit">Add</button>
+            <input type="text" name="title" placeholder="Enter Todo... " maxlength="40"> <!--Taskeingabe bis 40 Zeichen)-->
+            <div class="input-group"> <!--Klasse, um die 2 Felder nebeneinander zu stellen-->
+                <input type="date" name="due" placeholder="Enter date... " max="2030-12-31"> <!--später als 2030 nicht möglich-->
+                <select name="category" id="category">
+                    <option value="Personal">Personal</option>
+                    <option value="Work">Work</option>
+                    <option value="Urgent">Urgent</option>
+                </select>
+            </div>
+            <button type="submit">ADD</button>
         </div>
     </form>
+
 
 
 <!-- Links für Kategorie- Filter -->
@@ -38,7 +38,6 @@
     <a href="/category/Work" class="{{ 'highlighted-category' if current_category == 'Work' else '' }}">Work</a>
     <a href="/category/Urgent" class="{{ 'highlighted-category' if current_category == 'Urgent' else '' }}">Urgent</a>
 </div>
-
 
 
 <!--Jinja for loop für tasks-->
@@ -63,7 +62,7 @@
 
 {% if todo_list|length == 0 %}
     <div class="no-todos">
-        <p>Es sind noch keine Todos in dieser Kategorie vorhanden.</p> <!--Meldung wird angezeigt, wenn die gefilterte Liste todo_list leer ist.-->
+        <p>Until now, no todos here</p> <!--Meldung wird angezeigt, wenn die gefilterte Liste todo_list leer ist.-->
     </div>
 {% endif %}
 

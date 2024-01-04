@@ -48,8 +48,8 @@ def add():
     return redirect(url_for("index")) #Weiterleitung zur 'index'-Route
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
-
 #TASK UPDATEN
+
 @app.route("/update/<int:todo_id>")
 def update(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -58,8 +58,8 @@ def update(todo_id):
     return redirect(url_for("index"))
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
-
 #TASK LÖSCHEN
+
 @app.route("/delete/<int:todo_id>")
 def delete(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -79,6 +79,7 @@ def delete(todo_id):
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #FILTER KATEGORIE PERMANTENT ANZEIGEN
+
 @app.route('/category/<category_name>')
 def tasks_by_category(category_name):
     todo_list = Todo.query.filter_by(category=category_name).all()
