@@ -17,14 +17,14 @@ body {     /* Grundlegende Stileinstellungen für <body> */
     min-height: 100vh; /* Body immer mindestens so hoch wie Viewport */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; 
+    background-color: #1f1e1e; 
     color: #333; 
     text-align: center;
     font-size: 14px; 
 }
 
 h1, footer {
-    background-color: #432b46; 
+    background-color: #53555b; 
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -34,10 +34,6 @@ h1 {
     margin: 0;
 }
 
-footer {
-    margin-top: auto; /* Footer bleibt am unteren Rand */
-    height: 20px;
-}
 
 form, .todo-item {
     margin: 10px auto; 
@@ -64,10 +60,6 @@ input[type=text] {
     justify-content: space-between; /* Verteilt den Platz gleichmäßig */
 }
 
-.input-group input, .input-group select {
-    width: calc(50% - 10px); /* Setzt die Breite auf 50% abzüglich des Abstands */
-}
-
 .input-group input {
     margin-right: 10px; /* Abstand nur auf der rechten Seite des Input-Feldes  */
 }
@@ -78,9 +70,8 @@ input[type=text] {
 
 .input-group input, .input-group select {
     box-sizing: border-box; /* Stellt sicher, dass Breite Ränder und Rahmen einschließt */
-    width: calc(50% - 5px);
+    width: calc(50% - 5px); /* Setzt die Breite auf 50% abzüglich des Abstands */
 }
-
 
 .no-todos {
     text-align: center;
@@ -93,6 +84,7 @@ select#category:focus, .todo-item a:focus {
     border-color: var(--input-border-color); /* Verwendung der globalen CSS-Variable für die Borderfarbe */
 }
 
+
 .category-links a, button {
     background-color: var(--button-bg);
     color: white;
@@ -100,9 +92,10 @@ select#category:focus, .todo-item a:focus {
     border: none;
     border-radius: var(--button-border-radius);
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.4s;
     text-decoration: none; /* Entfernt den Unterstrich von Links */
 }
+
 
 .category-links a {
     display: inline-block;
@@ -114,17 +107,22 @@ select#category:focus, .todo-item a:focus {
     background-color: var(--button-bg-hover);
 }
 
+
 .highlighted-category {
     font-weight: bold;
+    background-color: #368f47 !important;
 }
 
 .todo-item {
-    background-color: white;
+    width: var(--input-width); /* Setzt die Breite des Todo-Items gleich der Breite des Title-Eingabefelds */
+    margin: 10px auto; /* Zentriert das Todo-Item horizontal */
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 2px 4px #666;
     text-align: left;
+    background-color: white;
 }
+
 
 .todo-status {
     display: flex;
@@ -135,6 +133,7 @@ select#category:focus, .todo-item a:focus {
 
 .red-text {
     color: red;
+    font-weight: bold;
 }
 
 .todo-item p {
@@ -147,4 +146,18 @@ select#category:focus, .todo-item a:focus {
 
 .todo-item .delete:hover {
     background-color: #ff2b2b;
+}
+
+.completed-todo {
+    opacity: 0.6; /* Setzt die Transparenz auf 40% */
+}
+
+.completed-text {
+    font-weight: bold; /* Setzt den Text auf fett */
+    font-size: 1.4em;
+}
+
+footer {
+    margin-top: auto; /* Footer bleibt am unteren Rand */
+    height: 20px;
 }

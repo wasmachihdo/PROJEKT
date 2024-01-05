@@ -42,17 +42,17 @@
 
 <!--Jinja for loop für tasks-->
 {% for todo in todo_list %}
-    <div class="todo-item">
-        <p>{{ todo.id }} | {{ todo.title }}</p>
-        {% if todo.due %}
-            <p>Due: {{ todo.due.strftime('%Y-%m-%d') }}</p>
-        {% endif %}
+    <div class="todo-item {{ 'completed-todo' if todo.complete }}">
+        <p class="{{ 'red-text' if todo.due and todo.due < current_date else '' }}">
+            {{ todo.id }} | {{ todo.title }}
+            {% if todo.due %} - Due: {{ todo.due.strftime('%Y-%m-%d') }} {% endif %}
+        </p>
         <p>Category: {{ todo.category }}</p>
         <div class="todo-status">
             {% if todo.complete == False %}
                 <span>Not Completed</span>   
             {% else %}
-                <span>Completed</span>
+                <span class="completed-text">Completed</span>            
             {% endif %}
             <a href="/update/{{ todo.id }}" class="update">Modify Status</a>
             <a href="/delete/{{ todo.id }}" class="delete">Delete</a>
