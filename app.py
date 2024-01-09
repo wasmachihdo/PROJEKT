@@ -29,7 +29,7 @@ class Todo(db.Model): #Tabellendaten: ID, Titel, Ablaufdatum
 
 @app.route('/')
 def index(): #alle Tasks 
-    todo_list = Todo.query.all() #Liste generieren
+    todo_list = Todo.query.order_by(Todo.id.desc()).all() #Abfrage der Todo-Liste in umgekehrter Reihenfolge (neueste zuerst) nach ID
     current_date = datetime.datetime.now() #aktuelles Datum soll mit Eingabe verglichen werden
     return render_template("base.html", todo_list=todo_list, current_date=current_date) # HTML in Template-Dateien ausgelagert und mit render_template versendet
 
@@ -69,15 +69,6 @@ def delete(todo_id):
     return redirect(url_for("index"))
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
-#KATEGORIE FILTER
-
-#@app.route('/category/<category_name>')
-#def tasks_by_category(category_name):
-#    todo_list = Todo.query.filter_by(category=category_name).all()
-#    current_date = datetime.datetime.now()
-#    return render_template("base.html", todo_list=todo_list, current_date=current_date)
-
-#--------------------------------------------------------------------------------------------------------------------------------------------------
 #FILTER KATEGORIE PERMANTENT ANZEIGEN
 
 @app.route('/category/<category_name>')
@@ -87,7 +78,7 @@ def tasks_by_category(category_name):
     return render_template("base.html", todo_list=todo_list, current_date=current_date, current_category=category_name)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
-
+#DATENBANKERSTELLUNG UND RUN APPLIKATION
 
 if __name__ == "__main__":
     with app.app_context():

@@ -1,7 +1,6 @@
 <!DOCTYPE html> 
 <html lang="en">
 
-<!--Name Überschrift ändern?-->
 <head>
     <link rel="stylesheet" href="/static/style.css">
     <meta charset="UTF-8">
@@ -12,11 +11,9 @@
 <body>
 
 <h1>THINGS TO BE DONE</h1>
-
-
     <form action="/add" method="post">
         <div>
-            <input type="text" name="title" placeholder="Enter Todo... " maxlength="40"> <!--Taskeingabe bis 40 Zeichen)-->
+            <input type="text" name="title" placeholder="Enter Todo... " maxlength="40" required> <!--Taskeingabe bis 40 Zeichen und erforderlich)-->
             <div class="input-group"> <!--Klasse, um die 2 Felder nebeneinander zu stellen-->
                 <input type="date" name="due" placeholder="Enter date... " max="2030-12-31"> <!--später als 2030 nicht möglich-->
                 <select name="category" id="category">
@@ -29,16 +26,13 @@
         </div>
     </form>
 
-
-
 <!-- Links für Kategorie- Filter -->
 <div class="category-links">
-    <a href="/" class="{{ 'highlighted-category' if current_category == 'All' else '' }}">All Tasks</a>
+    <a href="/" class="{{ 'highlighted-category' if not current_category or current_category == 'All' else '' }}">All Tasks</a> 
     <a href="/category/Personal" class="{{ 'highlighted-category' if current_category == 'Personal' else '' }}">Personal</a>
     <a href="/category/Work" class="{{ 'highlighted-category' if current_category == 'Work' else '' }}">Work</a>
     <a href="/category/Urgent" class="{{ 'highlighted-category' if current_category == 'Urgent' else '' }}">Urgent</a>
 </div>
-
 
 <!--Jinja for loop für tasks-->
 {% for todo in todo_list %}
@@ -62,7 +56,7 @@
 
 {% if todo_list|length == 0 %}
     <div class="no-todos">
-        <p>Until now, no todos here</p> <!--Meldung wird angezeigt, wenn die gefilterte Liste todo_list leer ist.-->
+        <p>Until now, no todos here</p> <!--wird angezeigt, wenn die gefilterte Liste todo_list leer ist.-->
     </div>
 {% endif %}
 
@@ -70,6 +64,6 @@
     <p>© 2023 One Great Todo App. All rights reserved.</p>
 </footer>
 
-
 </body>
+
 </html>
