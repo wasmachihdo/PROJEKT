@@ -1,28 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for  #Import flask
-from flask_sqlalchemy import SQLAlchemy #Import Datenbank
-from sqlalchemy.orm import DeclarativeBase
+from flask_sqlalchemy import SQLAlchemy #Import der SQLAlchemy-Erweiterung für Flask
+from sqlalchemy.orm import DeclarativeBase #Import von DeclarativeBase aus SQLAlchemy -> Declarative Mapping 
 from sqlalchemy import Integer, String, DateTime #Datenarten: Zahl, Zeichenkette, Datum
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column #Import von Mapped und mapped_column aus SQLAlchemy ORM, für Definition von Attributen in ORM-Modellen
 import datetime #Modul für Datum (Ablaufdatum des Tasks)
+
+from models import Todo, db
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #INITIALISIERUNG FLASK
 
 app = Flask(__name__) 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite" #Setzt die Datenbank-URI für SQLAlchemy (Datenspeicherung)
-db = SQLAlchemy() #Datenbank kreieren
 db.init_app(app)
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------
-#TABELLE ERSTELLEN
-
-class Todo(db.Model): #Tabellendaten: ID, Titel, Ablaufdatum
-    __tablename__="todo"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True) #id wird automatisch vergeben
-    title: Mapped[str] = mapped_column(String(40), nullable=False) #maximal 40 Zeichen für die Eingabe des Tasks 
-    due: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=False),nullable=True) #Eingabe Datum 
-    complete: Mapped[bool] = mapped_column(db.Boolean, default=False)
-    category: Mapped[str] = mapped_column(String(50)) # Kategorien oder Tags
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #QUERY MODELS

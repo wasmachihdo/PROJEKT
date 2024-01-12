@@ -1,1 +1,2 @@
 instance/db.sqlite
+__pycache__/*
