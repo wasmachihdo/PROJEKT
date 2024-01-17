@@ -7,7 +7,6 @@ import datetime #Modul für Datum (Ablaufdatum des Tasks)
 
 db = SQLAlchemy() #Datenbank kreieren
 #--------------------------------------------------------------------------------------------------------------------------------------------------
-
 #TABELLE ERSTELLEN
 
 class Todo(db.Model): #Tabellendaten: ID, Titel, Ablaufdatum
