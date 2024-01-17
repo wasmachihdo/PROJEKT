@@ -121,7 +121,7 @@ select#category:focus, .todo-item a:focus {        /* Stil wird nur auf das <sel
 
 .todo-status {    /* Stile für Todo-Items */
     display: flex;
-    justify-content: space-between;  /* Gleichmäßige Verteilung des Raums */
+    justify-content: space-between;  /* Gleichmässige Verteilung des Raums */
     align-items: center;
     margin-top: 10px;
 }

@@ -20,7 +20,7 @@ db.init_app(app)
 
 @app.route('/')
 def index(): #alle Tasks 
-    todo_list = Todo.query.order_by(Todo.id.desc()).all() #Abfrage der Todo-Liste in umgekehrter Reihenfolge (neueste zuerst) nach ID
+    todo_list = Todo.query.order_by(Todo.complete, Todo.id.desc()).all()   # Abfrage, die zuerst nicht abgeschlossene und dann abgeschlossene Todos anzeigt
     current_date = datetime.datetime.now() #aktuelles Datum soll mit Eingabe verglichen werden
     return render_template("base.html", todo_list=todo_list, current_date=current_date) # HTML in Template-Dateien ausgelagert und mit render_template versendet
 
@@ -36,35 +36,34 @@ def add():
     new_todo = Todo(title=title, due=due_date, category=category) #neues Todo-Objekt
     db.session.add(new_todo) #neues Todo-Objekt hinzufügen
     db.session.commit() 
-    return redirect(url_for("index")) #Weiterleitung zur 'index'-Route
+    return redirect(url_for("index")) # Redirect zur Indexpage, um die Gesamtübersicht anzuzeigen
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
 #TASK UPDATEN
 
 @app.route("/update/<int:todo_id>")
 def update(todo_id):
-    todo = Todo.query.filter_by(id=todo_id).first()
-    todo.complete = not todo.complete
-    db.session.commit()
-    return redirect(url_for("index"))
+    todo = Todo.query.filter_by(id=todo_id).first() # Findet das Todo anhand seiner ID
+    todo.complete = not todo.complete # Ändert den Status von abgeschlossen/nicht abgeschlossen
+    db.session.commit() # Speichert die Änderung
+    return redirect(url_for("index")) # Redirect immer zur Indexpage, um die Gesamtübersicht anzuzeigen
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
 #TASK LÖSCHEN
 
 @app.route("/delete/<int:todo_id>")
 def delete(todo_id):
-    todo = Todo.query.filter_by(id=todo_id).first()
-    todo.complete = not todo.complete
-    db.session.delete(todo)
-    db.session.commit()
-    return redirect(url_for("index"))
+    todo = Todo.query.filter_by(id=todo_id).first() # Findet das zu löschende Todo
+    db.session.delete(todo) # Löscht das Todo aus der Datenbank
+    db.session.commit() # Speichert die Änderung
+    return redirect(url_for("index")) # Redirect immer zur Indexpage, um die Gesamtübersicht anzuzeigen
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #FILTER KATEGORIE PERMANTENT ANZEIGEN
 
 @app.route('/category/<category_name>')
 def tasks_by_category(category_name):
-    todo_list = Todo.query.filter_by(category=category_name).all()
+    todo_list = Todo.query.filter_by(category=category_name).all() # Filtert Todos nach Kategorie
     current_date = datetime.datetime.now()
     return render_template("base.html", todo_list=todo_list, current_date=current_date, current_category=category_name)
 
@@ -73,11 +72,7 @@ def tasks_by_category(category_name):
 
 if __name__ == "__main__":
     with app.app_context():
-        db.create_all() #Erstellt alle Datenbanktabellen, welche gemacht wurden
-        app.run(debug=True, port=5000) #Flask-Entwicklungsserver
+        db.create_all() # Erstellt alle Datenbanktabellen, welche gemacht wurden
+        app.run(debug=True, port=5000) # Startet den Flask-Entwicklungsserver
  
 #--------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-

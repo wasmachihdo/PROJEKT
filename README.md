@@ -1,4 +1,4 @@
-# **Todo-Anwendung**
+# **Anwendung "One Great Todo App"**
 
 ## **Einführung / Projektidee**
 
@@ -11,9 +11,9 @@
 
 - **Aufgaben hinzufügen:** Benutzer können neue Aufgaben (Tasks) hinzufügen und diese optional mit Fälligkeitsdatum versehen und zu einer Kategorie zuordnen.
 - **Aufgaben anzeigen:** Alle Aufgaben werden auf der Hauptseite aufgelistet, überfällige Aufgaben werden in roter Farbe hervorgehoben.
-- **Aufgabenstatus aktualisieren:** Aufgaben können als abgeschlossen oder nicht abgeschlossen markiert werden. Die Voreinstellung einer neuen Aufgabe ist 'not completed' (nicht abgeschlossen) und kann mit dem Button 'Modify Status' geändert werden. Abgeschlossene Aufgaben werden mit reduzierter Transparenz dargestellt, um sie visuell von den offenen Aufgaben abzuheben. 
-- **Aufgaben löschen:** Benutzer können Aufgaben löschen (Button 'Delete').
-- **Kategorisierung von Aufgaben:** Benutzer können den Aufgaben Kategorien ('Personal', 'Work', 'Urgent') zuteilen und die Tasks anschliessend basierend auf diesen Kategorien filtern. Die Zuteilung ist aber nicht erforderlich.
+- **Aufgabenstatus aktualisieren:** Aufgaben können als abgeschlossen oder nicht abgeschlossen markiert werden. Die Voreinstellung einer neuen Aufgabe ist 'not completed' (nicht abgeschlossen) und kann mit dem Button 'Modify Status' geändert werden. Abgeschlossene Aufgaben werden auf der Hauptseite automatisch unten aufgeführt und auf allen Seiten mit reduzierter Transparenz dargestellt, um sie visuell von den offenen Aufgaben abzuheben. Nach dem Aktualisieren des Status einer Aufgabe wird die Gesamtübersicht (index) angezeigt.
+- **Aufgaben löschen:** Benutzer können Aufgaben löschen (Button 'Delete'). Nach dem Löschen einer Aufgabe wird die Gesamtübersicht (index) angezeigt.
+- **Kategorisierung von Aufgaben:** Benutzer können den Aufgaben Kategorien ('Personal', 'Work', 'Urgent') zuteilen und die Tasks anschliessend basierend auf diesen Kategorien filtern.
 
 ## **Installation und Einrichtung**
 
@@ -61,12 +61,12 @@
 - **Ausgeben:** Verschiedene Ansichten ermöglichen eine bessere Übersicht der Aufgaben.
 
 ## Kommentare im Code
-- Jeder Funktion und Klasse im Code sind erklärende Kommentare vorangestellt, welche Zweck und Funktionsweise erläutern. 
-- Wichtige Codeblöcke, etwa solche mit komplexerer Logik, sind mit Inline-Kommentaren versehen.
+- Wichtige Codeblöcke, zum Beispiel solche mit etwas komplexerer Logik, sind mit Kommentaren versehen.
 
 ## **Verwendete Technologien**
 
-- **primäre Programmiersprache:** Python
+- **Programmiersprache:** Python
 - **Backend:** Flask
 - **Datenbank:** SQLAlchemy (SQLite)
 - **Frontend:** HTML, CSS
+- **Template-Engine:** Jinja
